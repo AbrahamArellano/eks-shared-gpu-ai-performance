@@ -1,0 +1,87 @@
+Admin:~/environment/eks-shared-gpu-ai-performance/tests (main) $ ./load_test_exclusive.sh
+=== Complete Exclusive GPU Performance Analysis ===
+Timestamp: Fri Jul 25 13:36:57 UTC 2025
+This will test individual baselines + concurrent performance impact
+
+Report will be saved to: test_results_exclusive/performance_report_20250725_133657.txt
+=== Checking Dependencies ===
+curl: ✓
+jq: ✓
+bc: ✓
+
+=== Detecting Active Models ===
+Checking Phi-3.5-Mini health... ✓ Active
+Checking DeepSeek-R1 health... ✗ Inactive
+
+=== Starting Complete Performance Analysis ===
+
+=== Testing Phi-3.5-Mini (Individual Baseline) ===
+Running 3 iterations with 5 prompts each...
+  Test 1: 'Explain machine learning in si...'... ✓ .610635671s
+  Test 1: 'What is Python programming lan...'... ✓ .602692152s
+  Test 1: 'Describe cloud computing benef...'... ✓ .602353194s
+  Test 1: 'How does artificial intelligen...'... ✓ .601333758s
+  Test 1: 'What are the advantages of aut...'... ✓ .601527006s
+  Test 2: 'Explain machine learning in si...'... ✓ .602095451s
+  Test 2: 'What is Python programming lan...'... ✓ .604169538s
+  Test 2: 'Describe cloud computing benef...'... ✓ .603471800s
+  Test 2: 'How does artificial intelligen...'... ✓ .603847508s
+  Test 2: 'What are the advantages of aut...'... ✓ .603026774s
+  Test 3: 'Explain machine learning in si...'... ✓ .602812992s
+  Test 3: 'What is Python programming lan...'... ✓ .602791977s
+  Test 3: 'Describe cloud computing benef...'... ✓ .602012242s
+  Test 3: 'How does artificial intelligen...'... ✓ .602616511s
+  Test 3: 'What are the advantages of aut...'... ✓ .602961180s
+
+Individual Results for Phi-3.5-Mini:
+  Total requests: 15
+  Successful: 15
+  Success rate: 100.0%
+  Average latency: .603s
+  Throughput: 99.46 req/min
+
+Only one model active - skipping concurrent testing
+To test GPU impact, ensure both models are running.
+
+=== Complete Analysis Finished ===
+Detailed results saved to: test_results_exclusive/performance_report_20250725_133657.txt
+
+Quick Summary from Report:
+=============================================
+=== Phi-3.5-Mini Individual Baseline ===
+Average Latency: .603s
+Throughput: 99.46 req/min
+=== Analysis Summary ===
+
+Analysis Complete!
+• Individual baselines establish optimal performance
+• Concurrent results show exclusive GPU impact
+• Performance impact percentages quantify degradation
+
+Check test_results_exclusive/performance_report_20250725_133657.txt for detailed results and analysis.
+
+
+
+
+Exclusive GPU Performance Analysis Report
+Generated: Fri Jul 25 13:36:57 UTC 2025
+=============================================
+
+=== Phi-3.5-Mini Individual Baseline ===
+Total Requests: 15
+Successful Requests: 15
+Success Rate: 100.0%
+Average Latency: .603s
+Throughput: 99.46 req/min
+
+
+=== Analysis Summary ===
+This report compares individual model performance vs concurrent performance
+to measure exclusive GPU impact on Amazon EKS.
+
+Individual baselines show optimal performance when each model has full GPU access.
+Concurrent results show performance degradation due to GPU resource sharing.
+
+Performance impact percentages indicate the cost of running multiple models
+on a single GPU using exclusive GPU configuration.
+
