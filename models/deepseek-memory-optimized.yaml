@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deepseek-r1-baseline
+  namespace: llm-testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deepseek-r1-baseline
+  template:
+    metadata:
+      labels:
+        app: deepseek-r1-baseline
+    spec:
+      containers:
+      - name: deepseek
+        image: ghcr.io/huggingface/text-generation-inference:3.3.4
+        args:
+        - "--model-id"
+        - "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+        - "--port"
+        - "80"
+        - "--max-input-length"
+        - "256"
+        - "--max-total-tokens"
+        - "512"
+        - "--max-batch-prefill-tokens"
+        - "4096"
+        - "--max-batch-total-tokens"
+        - "8192"
+        - "--cuda-memory-fraction"
+        - "0.4"
+        - "--max-concurrent-requests"
+        - "16"
+        - "--max-waiting-tokens"
+        - "5"
+        ports:
+        - containerPort: 80
+        env:
+        - name: PYTORCH_CUDA_ALLOC_CONF
+          value: "expandable_segments:True"
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: 8Gi
+          requests:
+            memory: 4Gi
+            nvidia.com/gpu: 1
+        securityContext:
+          capabilities:
+            add: ["SYS_NICE"]
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /data
+        - name: shm-volume
+          mountPath: /dev/shm
+      nodeSelector:
+        eks-node: gpu
+      volumes:
+      - name: cache-volume
+        emptyDir: {}
+      - name: shm-volume
+        emptyDir:
+          medium: Memory
+          sizeLimit: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deepseek-r1-service
+  namespace: llm-testing
+spec:
+  selector:
+    app: deepseek-r1-baseline
+  ports:
+  - port: 8080
+    targetPort: 80
+  type: ClusterIP

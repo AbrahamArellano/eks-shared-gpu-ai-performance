@@ -1,0 +1,14 @@
+=== Phi-3.5-Mini Test Results ===
+Timestamp: Fri Jul 25 09:47:32 UTC 2025
+Total Requests: 9
+Successful: 9
+Average Latency: .371s
+Throughput: 161.66 req/min
+
+=== DeepSeek-R1 Test Results ===
+Timestamp: Fri Jul 25 09:47:38 UTC 2025
+Total Requests: 9
+Successful: 9
+Average Latency: .685s
+Throughput: 87.47 req/min
+

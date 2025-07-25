@@ -1,0 +1,41 @@
+GPU Time-Slicing Performance Analysis Report
+Generated: Fri Jul 25 09:57:10 UTC 2025
+=============================================
+
+=== Phi-3.5-Mini Individual Baseline ===
+Total Requests: 15
+Successful Requests: 15
+Success Rate: 100.0%
+Average Latency: .609s
+Throughput: 98.44 req/min
+
+=== DeepSeek-R1 Individual Baseline ===
+Total Requests: 15
+Successful Requests: 15
+Success Rate: 100.0%
+Average Latency: 1.135s
+Throughput: 52.84 req/min
+
+=== Phi-3.5-Mini Concurrent Performance ===
+Average Latency: 1.227s
+Throughput: 48.89 req/min
+Success Rate: 100.0%
+Performance Impact: +101.4% latency, -50.3% throughput
+
+=== DeepSeek-R1 Concurrent Performance ===
+Average Latency: 1.778s
+Throughput: 33.74 req/min
+Success Rate: 100.0%
+Performance Impact: +56.6% latency, -36.1% throughput
+
+
+=== Analysis Summary ===
+This report compares individual model performance vs concurrent performance
+to measure GPU time-slicing impact on Amazon EKS.
+
+Individual baselines show optimal performance when each model has full GPU access.
+Concurrent results show performance degradation due to GPU resource sharing.
+
+Performance impact percentages indicate the cost of running multiple models
+on a single GPU using NVIDIA time-slicing technology.
+
